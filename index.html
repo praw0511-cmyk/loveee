@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>For My Babe 💕</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    font-family:"Segoe UI",sans-serif;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    text-align:center;
+    padding:20px;
+    overflow:hidden;
+}
+.box{
+    background:#fff;
+    border-radius:20px;
+    padding:25px;
+    max-width:420px;
+    margin:auto;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    position:relative;
+    z-index:2;
+}
+input{
+    padding:10px;
+    font-size:18px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    width:80%;
+    text-align:center;
+}
+button{
+    margin-top:15px;
+    padding:10px 20px;
+    font-size:18px;
+    border-radius:15px;
+    border:none;
+    background:#ff5fa2;
+    color:white;
+    cursor:pointer;
+}
+button:hover{background:#ff2f86;}
+.hidden{display:none;}
+.emoji{font-size:40px;cursor:pointer;margin:15px;}
+.back{margin-top:15px;color:#007bff;cursor:pointer;text-decoration:underline;}
+
+/* หัวใจลอย */
+.heart{
+    position:fixed;
+    bottom:-20px;
+    font-size:20px;
+    animation:floatUp 6s linear infinite;
+    opacity:0.8;
+}
+@keyframes floatUp{
+    0%{transform:translateY(0);opacity:0;}
+    20%{opacity:1;}
+    100%{transform:translateY(-100vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- เพลง -->
+<audio id="bgm" loop>
+    <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+<!-- หน้าใส่รหัส -->
+<div class="box" id="p1">
+    <h2>🔐 ใส่รหัสวันครบรอบ</h2>
+    <p>คำใบ้ 💡<br>วันที่คบกันมี 6 ตัวน้าา 😘</p>
+    <input type="password" id="pass" placeholder="******">
+    <br>
+    <button onclick="checkPass()">ยืนยัน</button>
+</div>
+
+<div class="box hidden" id="p2">
+    <h2>🎉 รหัสผ่านถูกต้อง</h2>
+    <p>ที่รักเก่งที่สุดเลยค้าบ 💕</p>
+    <button onclick="goQuestion()">กดข้าม ➡️</button>
+</div>
+
+<div class="box hidden" id="p3">
+    <h2>HEY BABE 🥰</h2>
+    <p>รักเค้าไหม?</p>
+    <span class="emoji" onclick="love()">❤️</span>
+    <span class="emoji" onclick="notLove()">❌</span>
+</div>
+
+<div class="box hidden" id="p4">
+    <h2>😡</h2>
+    <p>ไม่รักเค้าจริงหรอ<br>เค้าไม่น่ารักตรงไหน!</p>
+    <div class="back" onclick="goQuestion()">⬅️ ย้อนกลับ</div>
+</div>
+
+<div class="box hidden" id="p5">
+    <h2>💐</h2>
+    <p>เค้ารักเธอมากที่สุดดด 💖</p>
+    <p>🌹🌸🌷💐🌼</p>
+    <button onclick="approve()">คลิกอนุมัติให้คุณเป็น "คนโปรด" ตลอดไป</button>
+</div>
+
+<div class="box hidden" id="p6">
+    <h2>💞</h2>
+    <p>
+        อนุมัติให้ความรักนี้มีผลตลอดไป<br>
+        ❤️❤️❤️
+    </p>
+</div>
+
+<script>
+let musicPlayed=false;
+
+function playMusic(){
+    if(!musicPlayed){
+        document.getElementById("bgm").play();
+        musicPlayed=true;
+    }
+}
+
+function hideAll(){
+    document.querySelectorAll(".box").forEach(b=>b.classList.add("hidden"));
+}
+
+function checkPass(){
+    playMusic();
+    if(pass.value==="060566"){
+        hideAll();p2.classList.remove("hidden");
+    }else{
+        alert("รหัสไม่ถูกนะ ลองใหม่อีกที 💔");
+    }
+}
+
+function goQuestion(){playMusic();hideAll();p3.classList.remove("hidden");}
+function notLove(){hideAll();p4.classList.remove("hidden");}
+function love(){hideAll();p5.classList.remove("hidden");}
+function approve(){hideAll();p6.classList.remove("hidden");}
+
+// สร้างหัวใจลอย
+setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(20+Math.random()*20)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+},400);
+</script>
+
+</body>
+</html>
